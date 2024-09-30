@@ -4,3 +4,6 @@ Note
 1. {!! $var !!} : hiển thị paragraph(<p>content</p>) thành văn bản (content) -> trường hợp bị lỗi css thì thêm preserveWords: true
 2. ucwords: viết hoa ký tự đầu
 3. $loop : global var dùng để xử lý bên trong vòng lặp- ex: $loop->index => lấy index của phần tử vòng lặp
+4. laravel spatie permission : Để xét vai trò //https://spatie.be/docs/laravel-permission/v6/installation-laravel
+5. https://www.tiny.cloud/ : Tini CLoud editor
+6. https://image.intervention.io/v3 : Chỉnh size ảnh tự động

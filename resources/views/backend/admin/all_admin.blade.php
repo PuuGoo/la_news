@@ -40,6 +40,7 @@
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th>Status</th>
+                                    <th>Role</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -55,6 +56,7 @@
                                     <td>{{$item->name}}</td>
                                     <td>{{$item->email }}</td>
                                     <td>{{$item->phone}}</td>
+
                                     <td>
                                         @if ($item->status === 'active')
                                         <span class="badge text-bg-success p-1">Active</span>
@@ -63,6 +65,14 @@
                                         @endif
 
                                     </td>
+
+                                    <td>
+                                        @foreach ($item->roles as $role)
+                                        <span class="badge badge-pill bg-danger">{{$role->name}}</span>
+                                        @endforeach
+
+                                    </td>
+
                                     <td>
                                         <a href="{{route('edit.admin', $item->id)}}" class="btn btn-primary rounded-pill waves-effect waves-light">Edit</a>
                                         <a href="{{route('delete.admin', $item->id)}}" id="delete" class="btn btn-danger rounded-pill waves-effect waves-light">Delete</a>

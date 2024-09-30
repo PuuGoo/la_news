@@ -114,11 +114,7 @@ $breaking_news = App\Models\NewsPost::where('breaking_news', 1)->get();
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <p class="text-muted font-13 mb-4">
-                            DataTables has most features enabled by default, so all you need to do to use it with your own tables is to call the construction
-                            function:
-                            <code>$().DataTable();</code>.
-                        </p>
+
 
                         <table id="basic-datatable" class="table dt-responsive nowrap w-100">
                             <thead>
@@ -155,9 +151,12 @@ $breaking_news = App\Models\NewsPost::where('breaking_news', 1)->get();
 
                                     </td>
                                     <td>
+                                        @if (Auth::user()->can('news.edit'))
                                         <a href="{{route('edit.news.post', $item->id)}}" class="btn btn-primary rounded-pill waves-effect waves-light">Edit</a>
+                                        @endif
+                                        @if (Auth::user()->can('news.delete'))
                                         <a href="{{route('delete.news.post', $item->id)}}" id="delete" class="btn btn-danger rounded-pill waves-effect waves-light">Delete</a>
-
+                                        @endif
                                         @if ($item->status == 1)
                                         <a href="{{route('inactive.news.post.user', $item->id)}}" class="btn btn-primary rounded-pill waves-effect waves-light" title="Inactive"><i class="fa-solid fa-thumbs-down"></i></a>
                                         @else

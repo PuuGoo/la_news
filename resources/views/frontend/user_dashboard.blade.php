@@ -14,7 +14,7 @@
 
 
                         <figure class="authorPage-image">
-                            <img alt="" src="{{!empty($userData->photo) ? asset('upload/user_images/' . $userData->photo) : asset('upload/no_image.jpg')}}" class="avatar avatar-96 photo" height="96" width="96" loading="lazy">
+                            <img alt="" src="{{!empty($userData->photo) && $userData->role == 'admin' ? asset('upload/admin_images/' . $userData->photo) : (!empty($userData->photo) ? asset('upload/user_images/' . $userData->photo) : asset('upload/avatar_default.png'))}}" class="avatar avatar-96 photo" height="96" width="96" loading="lazy">
                         </figure>
                         <h1 class="authorPage-name">
                             <a href=" "> {{$userData->name}} </a>
@@ -128,7 +128,7 @@
                                             </div>
                                             <div class="contact-form">
                                                 <span class="wpcf7-form-control-wrap sub_title">
-                                                    <img id="showImage" src="{{!empty($userData->photo) ? asset('upload/user_images/' . $userData->photo) : asset('upload/no_image.jpg')}}" class="rounded-circle avatar-lg img-thumbnail"
+                                                    <img id="showImage" src="{{!empty($userData->photo) && $userData->role == 'admin' ? asset('upload/admin_images/' . $userData->photo) : (!empty($userData->photo) ? asset('upload/user_images/' . $userData->photo) : asset('upload/avatar_default.png'))}}" class="rounded-circle avatar-lg img-thumbnail"
                                                         alt="profile-image" width="100px" height="100px">
                                                 </span>
                                             </div>

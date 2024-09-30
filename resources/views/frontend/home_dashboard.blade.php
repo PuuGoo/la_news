@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 
+@php
+$seo = App\Models\SeoSetting::findOrFail(1);
+@endphp
+
 <html lang="en-US">
 
 <head>
@@ -8,13 +12,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>LaNews | Home Page </title>
+    <title>@yield('title') </title>
 
     <link rel="shortcut icon" href="{{asset('/frontend/assets/images/favicon.gif')}}" type="image/x-icon">
 
 
-    <meta name="keywords" content="online newspaper, bangla news, news, bangla, newsportal">
-    <meta name="description" content="Popular News Paper of Bangladesh">
+    <meta name="title" content="{{ $seo->meta_title }}">
+    <meta name="author" content="{{ $seo->meta_author }}">
+
+    <meta name="keywords" content="{{ $seo->meta_keyword }}">
+    <meta name="description" content="{{ $seo->meta_description }}">
 
     <link rel="stylesheet" href="{{asset('/frontend/assets/css/line-awesome.min.css')}}" />
     <link rel="stylesheet" href="{{asset('/frontend/assets/css/headstyle.css')}}" />
@@ -72,7 +79,7 @@
             @yield('home')
         </div>
 
-    @include('frontend.body.footer')
+        @include('frontend.body.footer')
 
     </div>
     <script src="{{asset('/frontend/assets/regenerator-runtime.min.js')}}" id="regenerator-runtime-js"></script>

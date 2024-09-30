@@ -21,9 +21,9 @@
                     <h3 class="footer-title">
                         OFFICE : </h3>
                     <div class="footer-content">
-                        <p style="text-align: left;">Ga-130/A Pragati Sarani, Middle Badda </p>
-                        <p style="text-align: left;">EMAIL : support@easylearningbd.com</p>
-                        <p style="text-align: left;">MOBILE : 4334343434</p>
+                        <p style="text-align: left;">Address Example </p>
+                        <p style="text-align: left;">EMAIL : lanews@gmail.com</p>
+                        <p style="text-align: left;">MOBILE : 098xxxxxxx</p>
                     </div>
                 </div>
                 <div class="col-lg-7 col-md-7">
@@ -53,11 +53,11 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
                         <div class="copy-right">
-                            © All rights reserved © EasyNews </div>
+                            © All rights reserved © LaNews</div>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="design-developed">
-                            Theme Developed BY <a href=" " target="_blank">easylearningbd.Com</a> </div>
+                            Theme Developed BY <a href=" " target="_blank">LaNews</a> </div>
                     </div>
                 </div>
             </div>

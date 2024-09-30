@@ -48,12 +48,20 @@
 
 
 
+            @php
+            $review_count = Auth::user()->unreadNotifications()->count();
 
+
+            foreach (Auth::user()->unreadNotifications as $notification) {
+            $notification->markAsRead();
+            }
+
+            @endphp
 
             <li class="dropdown notification-list topbar-dropdown">
                 <a class="nav-link dropdown-toggle waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                     <i class="fe-bell noti-icon"></i>
-                    <span class="badge bg-danger rounded-circle noti-icon-badge">9</span>
+                    <span class="badge bg-danger rounded-circle noti-icon-badge">{{$review_count}}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-lg">
 
@@ -68,29 +76,31 @@
                         </h5>
                     </div>
 
-                    <div class="noti-scroll" data-simplebar>
+                    @php
+                    $user = Auth::user();
+                    @endphp
 
+                    <div class="noti-scroll" data-simplebar>
+                        @forelse($user->notifications as $notification)
                         <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item active">
+                        <a href="{{route('pending.review')}}" class="dropdown-item notify-item active">
+
                             <div class="notify-icon">
                                 <img src="{{asset('/backend/assets/images/users/user-1.jpg')}}" class="img-fluid rounded-circle" alt="" />
                             </div>
-                            <p class="notify-details">Cristina Pride</p>
+                            <p class="notify-details">{{$notification->data['message']}}
+                                <b>Admin</b>
+                                <small class="text-muted">{{Carbon\Carbon::parse($notification->created_at)->diffForHumans()}}</small>
+                            </p>
                             <p class="text-muted mb-0 user-msg">
                                 <small>Hi, How are you? What about our next meeting</small>
                             </p>
-                        </a>
 
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <div class="notify-icon bg-secondary">
-                                <i class="mdi mdi-heart"></i>
-                            </div>
-                            <p class="notify-details">Carlos Crouch liked
-                                <b>Admin</b>
-                                <small class="text-muted">13 days ago</small>
-                            </p>
                         </a>
+                        @empty
+
+                        @endforelse
+
                     </div>
 
                     <!-- All-->

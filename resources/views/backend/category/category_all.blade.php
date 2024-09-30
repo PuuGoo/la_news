@@ -25,11 +25,6 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <p class="text-muted font-13 mb-4">
-                            DataTables has most features enabled by default, so all you need to do to use it with your own tables is to call the construction
-                            function:
-                            <code>$().DataTable();</code>.
-                        </p>
 
                         <table id="basic-datatable" class="table dt-responsive nowrap w-100">
                             <thead>
@@ -48,8 +43,13 @@
                                     <td>{{$key +1}}</td>
                                     <td>{{$item->category_name}}</td>
                                     <td>
+                                        @if (Auth::user()->can('category.edit'))
                                         <a href="{{route('edit.category', $item->id)}}" class="btn btn-primary rounded-pill waves-effect waves-light">Edit</a>
+                                        @endif
+                                        @if (Auth::user()->can('category.delete'))
                                         <a href="{{route('delete.category', $item->id)}}" id="delete" class="btn btn-danger rounded-pill waves-effect waves-light">Delete</a>
+                                        @endif
+
                                     </td>
                                 </tr>
 

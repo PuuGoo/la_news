@@ -8,6 +8,10 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+
+use function PHPUnit\Framework\isNull;
 
 class AdminController extends Controller
 {
@@ -126,7 +130,8 @@ class AdminController extends Controller
 
     public function AddAdmin()
     {
-        return view('backend.admin.add_admin');
+        $roles = Role::all();
+        return view('backend.admin.add_admin', compact('roles'));
     }
 
     public function AdminStore(Request $request)
@@ -141,18 +146,25 @@ class AdminController extends Controller
         $user->status = 'inactive';
         $user->save();
 
+
+        if ($request->roles) {
+
+            $roles = Role::findOrFail($request->roles);
+            $user->assignRole($roles);
+        }
+
         $notification = array(
             'message' => 'New Admin User Created Successfully!',
             'alert-type' => 'success',
         );
-
         return redirect()->route('all.admin')->with($notification);
     }
 
     public function EditAdmin($id)
     {
+        $roles = Role::all();
         $adminuser = User::findOrFail($id);
-        return view('backend.admin.edit_admin', compact('adminuser'));
+        return view('backend.admin.edit_admin', compact('adminuser', 'roles'));
     }
 
     public function AdminUpdate(Request $request)
@@ -164,7 +176,16 @@ class AdminController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone = $request->phone;
+        $user->role = 'admin';
+        $user->status = 'active';
         $user->save();
+
+        $user->roles()->detach();
+        if ($request->roles) {
+
+            $roles = Role::findOrFail($request->roles);
+            $user->assignRole($roles);
+        }
 
         $notification = array(
             'message' => 'Admin User Updated Successfully!',
@@ -177,7 +198,12 @@ class AdminController extends Controller
     public function DeleteAdmin($id)
     {
 
-        User::findOrFail($id)->delete();
+        $user =  User::findOrFail($id);
+
+        if (!is_null($user)) {
+            $user->delete();
+        }
+
         $notification = array(
             'message' => 'Admin User Deleted Successfully!',
             'alert-type' => 'success',

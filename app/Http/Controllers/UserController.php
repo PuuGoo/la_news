@@ -14,7 +14,11 @@ class UserController extends Controller
         $id = Auth::user()->id;
         $userData = User::find($id);
 
-        return view('frontend.user_dashboard', compact('userData'));
+        if ($userData->email_verified_at != Null) {
+            return view('frontend.user_dashboard', compact('userData'));
+        } else {
+            return view('auth.verify-email');
+        }
     }
 
     public function UserProfileEdit(Request $request)
@@ -58,7 +62,7 @@ class UserController extends Controller
         $id = Auth::user()->id;
         $userData = User::find($id);
 
-        return view('frontend.change_password',compact('userData'));
+        return view('frontend.change_password', compact('userData'));
     }
 
     public function UserUpdatePassword(Request $request)

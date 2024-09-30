@@ -4,6 +4,11 @@
 @php
 use Illuminate\Support\Str;
 @endphp
+
+@section('title')
+{{$breadcrumb_cat->category_name}} | La News
+@endsection
+
 <div class="container">
 
     <div class="row">

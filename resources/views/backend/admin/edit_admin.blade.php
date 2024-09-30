@@ -50,6 +50,16 @@
                                     <label for="inputEmail4" class="form-label">Phone</label>
                                     <input type="text" class="form-control" id="inputEmail4" name="phone" value="{{$adminuser->phone}}">
                                 </div>
+
+                                <div class="form-group col-md-6 mb-3">
+                                    <label for="inputEmail4" class="form-label">Assign Roles</label>
+                                    <select name="roles" class="form-select" id="example-select">
+                                        <option> Select One Roles </option>
+                                        @foreach($roles as $role)
+                                        <option {{$adminuser->hasRole($role->name) ? 'selected' : ''}} value="{{ $role->id }}">{{ $role->name }} </option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
 
                             <button type="submit" class="btn btn-primary waves-effect waves-light">Save Changes</button>

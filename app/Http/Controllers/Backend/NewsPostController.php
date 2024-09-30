@@ -46,7 +46,7 @@ class NewsPostController extends Controller
             'subcategory_id' => $request->subcategory_id,
             'user_id' => $request->user_id,
             'news_title' => $request->news_title,
-            'news_title_slug' => strtolower(str_replace(' ','-', $request->news_title)),
+            'news_title_slug' => strtolower(str_replace(' ', '-', $request->news_title)),
             'news_details' => $request->news_details,
             'tags' => $request->tags,
 
@@ -58,7 +58,7 @@ class NewsPostController extends Controller
             'post_date' => date('d-m-Y'),
             'post_month' => date('F'),
             'image' => $save_url,
-            'created_at' => Carbon::now(),
+            'created_at' => Carbon::now()->setTimezone('Asia/Ho_Chi_Minh'),
 
         ]);
 
@@ -70,7 +70,8 @@ class NewsPostController extends Controller
         return redirect()->route('all.news.post')->with($notification);
     }
 
-    public function EditNewsPost($id) {
+    public function EditNewsPost($id)
+    {
 
         $categories = Category::latest()->get();
         $subcategories = SubCategory::latest()->get();
@@ -79,11 +80,12 @@ class NewsPostController extends Controller
         return view('backend.news.edit_news_post', compact('categories', 'subcategories', 'adminusers', 'newspost'));
     }
 
-    public function NewsPostUpdate(Request $request) {
+    public function NewsPostUpdate(Request $request)
+    {
         $newspost_id = $request->id;
         $data = NewsPost::find($newspost_id);
 
-        if($request->file('image')) {
+        if ($request->file('image')) {
             $image = $request->file('image');
             @unlink(public_path('upload/news/') . $data->image);
             $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
@@ -151,7 +153,8 @@ class NewsPostController extends Controller
         }
     }
 
-    public function DeleteNewsPost($id) {
+    public function DeleteNewsPost($id)
+    {
         $post_image = NewsPost::findOrFail($id)->image;
         unlink(public_path('upload/news/' . $post_image));
 
@@ -165,7 +168,8 @@ class NewsPostController extends Controller
         return redirect()->route('all.news.post')->with($notification);
     }
 
-    public function InactiveNewsPost($id) {
+    public function InactiveNewsPost($id)
+    {
 
         NewsPost::findOrFail($id)->update(['status' => 0]);
 

@@ -5,7 +5,7 @@ $cdate = new DateTime();
 
 @endphp
 
-@se
+
 
 <header class="themesbazar_header">
     <div class="container">
@@ -17,9 +17,9 @@ $cdate = new DateTime();
                 </div>
             </div>
             <div class="col-lg-4 col-md-4">
-                <form class="header-search" action="{{route('news.search.keyword')}}" method="post">
+                <form class="header-search" action="{{route('search.by.keyword')}}" method="post">
                     @csrf
-                    
+
                     <input type="text" alue="" name="key_search" placeholder=" Search Here " required="">
                     <button type="submit" value="Search"> <i class="las la-search"></i> </button>
                 </form>

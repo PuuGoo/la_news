@@ -1,39 +1,99 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('password.store') }}">
-        @csrf
+@extends('frontend.home_dashboard')
 
-        <!-- Password Reset Token -->
-        <input type="hidden" name="token" value="{{ $request->route('token') }}">
+@section('home')
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-12">
+            <div class="contact-wrpp">
+                <h4 class="contactAddess-title text-center">Reset Password</h4>
+                <div
+                    role="form"
+                    class="wpcf7"
+                    id="wpcf7-f437-o1"
+                    lang="en-US"
+                    dir="ltr">
+                    <div class="screen-reader-response">
+                        <p role="status" aria-live="polite" aria-atomic="true"></p>
+                        <ul></ul>
+                    </div>
+                    <form method="POST" action="{{ route('password.store') }}">
+                        @csrf
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                        <!-- Password Reset Token -->
+                        <input type="hidden" name="token" value="{{ $request->route('token') }}">
+
+                        <div style="display: none"></div>
+
+                        <div class="main_section">
+                            <div class="row">
+
+                                <div class="col-md-12 col-sm-12 d-none">
+                                    <div class="contact-title">Email *</div>
+                                    <div class="contact-form">
+                                        <span class="wpcf7-form-control-wrap sub_title">
+                                            <input
+                                                id="email"
+                                                type="email"
+                                                name="email"
+                                                value="{{$request->email}}"
+                                                size="40"
+                                                class="wpcf7-form-control wpcf7-text"
+                                                aria-invalid="false"
+                                                placeholder="Email" />
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="contact-title">Password *</div>
+                                    <div class="contact-form">
+                                        <span class="wpcf7-form-control-wrap sub_title">
+                                            <input
+                                                id="password"
+                                                type="password"
+                                                name="password"
+                                                value=""
+                                                size="40"
+                                                class="wpcf7-form-control wpcf7-text"
+                                                aria-invalid="false"
+                                                placeholder="Password" />
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="contact-title">Confirm Password *</div>
+                                    <div class="contact-form">
+                                        <span class="wpcf7-form-control-wrap sub_title">
+                                            <input
+                                                id="password_confirmation"
+                                                type="password"
+                                                name="password_confirmation"
+                                                value=""
+                                                size="40"
+                                                class="wpcf7-form-control wpcf7-text"
+                                                aria-invalid="false"
+                                                placeholder="Confirm Password" />
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="contact-btn">
+                                        <input
+                                            type="submit"
+                                            value="Register Now"
+                                            class="wpcf7-form-control has-spinner wpcf7-submit" /><span class="wpcf7-spinner"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Reset Password') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    </div>
+</div>
+@endsection

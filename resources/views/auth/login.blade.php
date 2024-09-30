@@ -68,6 +68,8 @@
                                 </div>
                             </div>
 
+                            <p class="text-end"><a class="text-decoration-none text-black text-primary" href="{{route('password.request')}}">Forgot Password!</a></p>
+
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="contact-btn">

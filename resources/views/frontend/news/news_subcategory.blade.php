@@ -4,6 +4,11 @@
 @php
 use Illuminate\Support\Str;
 @endphp
+
+@section('title')
+{{$breadcrumb_subcat->subcategory_name}} | La News
+@endsection
+
 <div class="container">
 
     <div class="row">
@@ -18,7 +23,7 @@ use Illuminate\Support\Str;
 
             <div class="rachive-info-cats">
                 <a href=" "><i class="las la-home"></i> </a>
-                <i class="las la-chevron-right"></i> {{$breadcrumb_subcat->category_name}}
+                <i class="las la-chevron-right"></i> {{$breadcrumb_subcat->subcategory_name}}
             </div>
 
             <div class="row">
